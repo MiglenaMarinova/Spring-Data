@@ -1,0 +1,59 @@
+package softuni.exam.instagraphlite.models.entity;
+
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Table(name = "users")
+public class User extends BaseEntity{
+
+//    •	username – a char sequence. Cannot be null. The username is unique.
+//    Must be between 2 and 18 (both numbers are INCLUSIVE)
+//•	password – a char sequence. Cannot be null. Must be at least 4 characters long, inclusive.
+//•	profilePicture – a Picture. Cannot be null.
+
+    @Column(name = "username", nullable = false, unique = true)
+    private String username;
+    @Column(name ="password", nullable = false)
+    private String password;
+    @ManyToOne
+    private Picture profilePicture;
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
+
+    @OneToMany(mappedBy = "user")
+    private List<Post> posts;
+
+    public User() {
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Picture getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(Picture profilePicture) {
+        this.profilePicture = profilePicture;
+    }
+}
